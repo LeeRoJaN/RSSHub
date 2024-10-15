@@ -34,6 +34,9 @@ const config = {
     next: {
         title: '智能时代',
     },
+    auto: {
+        title: '智车之家',
+    },
 };
 
 export const route: Route = {
@@ -52,9 +55,9 @@ export const route: Route = {
     name: '分类资讯',
     maintainers: ['luyuhuang'],
     handler,
-    description: `| it      | soft     | win10      | win11      | iphone      | ipad      | android      | digi     | next     |
-  | ------- | -------- | ---------- | ---------- | ----------- | --------- | ------------ | -------- | -------- |
-  | IT 资讯 | 软件之家 | win10 之家 | win11 之家 | iphone 之家 | ipad 之家 | android 之家 | 数码之家 | 智能时代 |`,
+    description: `| it      | soft     | win10      | win11      | iphone      | ipad      | android      | digi     | next     |auto     |
+  | ------- | -------- | ---------- | ---------- | ----------- | --------- | ------------ | -------- | -------- | -------- |
+  | IT 资讯 | 软件之家 | win10 之家 | win11 之家 | iphone 之家 | ipad 之家 | android 之家 | 数码之家 | 智能时代 | 智车之家 |`,
 };
 
 async function handler(ctx) {
