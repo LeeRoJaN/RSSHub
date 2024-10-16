@@ -4,13 +4,16 @@ import cache from '@/utils/cache';
 import got from '@/utils/got';
 import { load } from 'cheerio';
 import iconv from 'iconv-lite';
-import dayjs from 'dayjs';
+import { parseDate } from '@/utils/parse-date';
+import timezone from '@/utils/timezone';
 
-import timezone from 'dayjs/plugin/timezone';
-import utc from 'dayjs/plugin/utc';
+// import dayjs from 'dayjs';
 
-dayjs.extend(utc)
-dayjs.extend(timezone)
+// import timezone from 'dayjs/plugin/timezone';
+// import utc from 'dayjs/plugin/utc';
+
+// dayjs.extend(utc)
+// dayjs.extend(timezone)
 
 const get_url = (channel) => `https://www.autohome.com.cn/${channel}/`;
 
@@ -101,11 +104,17 @@ async function handler(ctx) {
                 const content = load(iconv.decode(res.data, 'gbk'));
 
                 const post = content('#articleContent');
+                post.find('.editor-image img').each((_, ele) => {
+                    ele = $(ele);
+                    ele.attr('src', ele.attr('data-src'));
+                    ele.removeAttr('data-src');
+                });
                 item.description = post.html();
 
                 const time = content('.article-info > .time').text().trim();
                 const formatTime = time.replace(/(\d{4})年(\d{2})月(\d{2})日/, '$1-$2-$3')
-                item.pubDate = dayjs(formatTime).tz("Asia/Shanghai").format('YYYY-MM-DD HH:mm')
+                // item.pubDate = dayjs(formatTime).tz("Asia/Shanghai").format('YYYY-MM-DD HH:mm')
+                item.pubDate = timezone(parseDate(formatTime,'YYYY-MM-DD HH:mm'), +8);
 
                 return item;
             })
