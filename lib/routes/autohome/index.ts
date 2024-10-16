@@ -104,7 +104,7 @@ async function handler(ctx) {
                 const content = load(iconv.decode(res.data, 'gbk'));
 
                 const post = content('#articleContent');
-                post.find('.editor-image img').each((_, ele) => {
+                post.find('img').each((_, ele) => {
                     ele = $(ele);
                     ele.attr('src', ele.attr('data-src'));
                     ele.removeAttr('data-src');
