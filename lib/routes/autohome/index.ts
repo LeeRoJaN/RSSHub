@@ -125,7 +125,7 @@ async function handler(ctx) {
     return {
         title: config[channel].title + ' - 汽车之家',
         link: current_url,
-        image: 'https://img.ithome.com/m/images/logo.png',
+        image: 'https://s2.loli.net/2024/10/17/rsQCpPJ6Oe1qcK7.png',
         item: items,
     };
 }
