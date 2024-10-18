@@ -96,6 +96,10 @@ async function handler(ctx) {
                     ele.removeAttr('class');
                     ele.removeAttr('data-original');
                 });
+                post.find('.ad-tips').each((_, ele) => {
+                    ele = $(ele);
+                    ele.text('');
+                });
                 item.description = post.html();
                 item.pubDate = new Date(content('#pubtime_baidu').text() + ' GMT+8').toUTCString();
                 return item;
