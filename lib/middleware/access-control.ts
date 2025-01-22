@@ -2,6 +2,7 @@ import type { MiddlewareHandler } from 'hono';
 import { config } from '@/config';
 import md5 from '@/utils/md5';
 import RejectError from '@/errors/types/reject';
+import logger from '@/utils/logger';
 
 const reject = () => {
     throw new RejectError('Authentication failed. Access denied.');
@@ -16,6 +17,9 @@ const middleware: MiddlewareHandler = async (ctx, next) => {
         await next();
     } else {
         if (config.accessKey && !(config.accessKey === accessKey || accessCode === md5(requestPath + config.accessKey))) {
+             logger.info(`错误信息: 
+            path:${requestPath}
+            code:${accessCode}`);
             return reject();
         }
         await next();
