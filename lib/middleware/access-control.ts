@@ -17,9 +17,7 @@ const middleware: MiddlewareHandler = async (ctx, next) => {
         await next();
     } else {
         if (config.accessKey && !(config.accessKey === accessKey || accessCode === md5(requestPath + config.accessKey))) {
-             logger.info(`错误信息: 
-            path:${requestPath}
-            code:${accessCode}`);
+             logger.info(`错误信息:`);
             return reject();
         }
         await next();
