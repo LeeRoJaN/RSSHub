@@ -20,6 +20,8 @@ const middleware: MiddlewareHandler = async (ctx, next) => {
           
             logger.warn(`错误信息 Origin: ${ctx.req.origin}`);
             logger.warn(`错误信息 Headers: ${ctx.req.headers}`);
+            logger.warn(`错误信息 Protocol: ${ctx.req.protocol}`);
+            logger.warn(`错误信息 Method: ${ctx.req.method}`);
             logger.warn(`错误信息: ${requestPath}  ${accessCode}`);
             return reject();
         }
