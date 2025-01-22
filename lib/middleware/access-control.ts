@@ -18,12 +18,20 @@ const middleware: MiddlewareHandler = async (ctx, next) => {
     } else {
         if (config.accessKey && !(config.accessKey === accessKey || accessCode === md5(requestPath + config.accessKey))) {
           
-            logger.warn(`错误信息 Origin: ${ctx.req.origin}`);
-            logger.warn(`错误信息 Headers: ${ctx.req.headers}`);
-            logger.warn(`错误信息 Protocol: ${ctx.req.protocol}`);
-            logger.warn(`错误信息 Method: ${ctx.req.method}`);
-            logger.warn(`错误信息 Url: ${ctx.req.url}`);
-            logger.warn(`错误信息 Host: ${ctx.req.host}`);
+            // logger.warn(`错误信息 IP: ${ctx.req.remoteAddr}`);
+            // logger.warn(`错误信息 Headers: ${ctx.req.headers}`);
+            // logger.warn(`错误信息 Protocol: ${ctx.req.protocol}`);
+            // logger.warn(`错误信息 Method: ${ctx.req.method}`);
+            // logger.warn(`错误信息 Url: ${ctx.req.url}`);
+            // logger.warn(`错误信息 Host: ${ctx.req.header('host')}`);
+            
+            logger.warn(`请求路径: ${ctx.req.path}`);
+            logger.warn(`请求方法: ${ctx.req.method}`);
+            logger.warn(`完整 URL: ${ctx.req.url}`);
+            logger.warn(`查询参数: ${JSON.stringify(ctx.req.query())}`);
+            logger.warn(`请求头: ${JSON.stringify(ctx.req.header())}`);
+            logger.warn(`是否 HTTPS: ${ctx.req.secure}`);
+            logger.warn(`客户端 IP: ${ctx.req.remoteAddr}`);
             
             logger.warn(`错误信息: ${requestPath}  ${accessCode}`);
             return reject();
