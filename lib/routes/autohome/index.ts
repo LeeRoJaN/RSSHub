@@ -89,8 +89,10 @@ async function handler(ctx) {
         .slice(0, 10)
         .map((_, item) => {
             item = $(item);
+            const t1 = item.find('h3').text();
+            
             return {
-                title: item.find('h3').text(),
+                title: t1 != '' ? t1 : item.find('p.article-content').text(),
                 link: 'https:' + item.attr('href'),
             };
         })
@@ -106,8 +108,11 @@ async function handler(ctx) {
                 const post = content('#articleContent');
                 post.find('img').each((_, ele) => {
                     ele = $(ele);
-                    ele.attr('src', ele.attr('data-src'));
-                    ele.removeAttr('data-src');
+                    let title = $('#articlewrap').find('h1').text();
+                    if(title != ''){
+                        ele.attr('src', ele.attr('data-src'));
+                        ele.removeAttr('data-src');
+                    }
                 });
                 item.description = post.html();
 
