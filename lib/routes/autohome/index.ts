@@ -110,8 +110,11 @@ async function handler(ctx) {
                     ele = $(ele);
                     let title = $('#articlewrap').find('h1').text();
                     if(title != ''){
-                        ele.attr('src', ele.attr('data-src'));
-                        ele.removeAttr('data-src');
+                        let dataSrc = ele.attr('data-src');
+                        if(dataSrc != ''){
+                            ele.attr('src', dataSrc);
+                            ele.removeAttr('data-src');
+                        }
                     }
                 });
                 item.description = post.html();
