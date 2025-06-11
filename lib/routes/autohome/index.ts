@@ -106,22 +106,13 @@ async function handler(ctx) {
                 const content = load(iconv.decode(res.data, 'gbk'));
 
                 const post = content('#articleContent');
-                post.find('img').each((_, ele) => {
+                 post.find('img').each((_, ele) => {
                     ele = $(ele);
-                    let title = $('#articlewrap').find('h1').text();
-                    if(title != ''){
-                        // 获取父级a标签的href属性
-                        const parent = ele.parent('a');
-                        if (parent.length > 0) {
-                            ele.attr('src', parent.attr('href'));
-                        }else{
-                            let dataSrc = ele.attr('data-src');
-                            if(dataSrc != ''){
-                                ele.attr('src', dataSrc);
-                                ele.removeAttr('data-src');
-                            }
-                        }
-                        
+                    // 获取父级a标签的href属性
+                    const parent = ele.parent('a');
+                
+                    if (parent.length > 0) {
+                        ele.attr('src', parent.attr('href'));
                     }
                 });
                 item.description = post.html();
