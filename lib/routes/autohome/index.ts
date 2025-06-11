@@ -110,11 +110,18 @@ async function handler(ctx) {
                     ele = $(ele);
                     let title = $('#articlewrap').find('h1').text();
                     if(title != ''){
-                        let dataSrc = ele.attr('data-src');
-                        if(dataSrc != ''){
-                            ele.attr('src', dataSrc);
-                            ele.removeAttr('data-src');
+                        // 获取父级a标签的href属性
+                        const parent = ele.parent('a');
+                        if (parent.length > 0) {
+                            ele.attr('src', parent.attr('href'));
+                        }else{
+                            let dataSrc = ele.attr('data-src');
+                            if(dataSrc != ''){
+                                ele.attr('src', dataSrc);
+                                ele.removeAttr('data-src');
+                            }
                         }
+                        
                     }
                 });
                 item.description = post.html();
