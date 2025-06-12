@@ -110,8 +110,10 @@ async function handler(ctx) {
                     ele = $(ele);
                     // 获取父级a标签的href属性
                     const parent = ele.parent('a');
-                
-                    if (parent.length > 0) {
+                    let dataSrc = ele.attr('data-src');
+                    if(dataSrc != ''){
+                        ele.attr('src', 'https:'+dataSrc);
+                    }else if (parent.length > 0) {
                         ele.attr('src', parent.attr('href'));
                     }
                 });
